@@ -137,8 +137,11 @@ TuCambio/
   - Verificación de TypeScript exitosa (`tsc --noEmit` sin errores).
 - [x] **Paso 6 (Usuario)**: Configuración para exportación e instalación de APK Android (.apk).
   - Configurado identificador de paquete único Android en [`app.json`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/app.json): `"package": "com.drds212.tucambio"`.
-  - Creado archivo [`eas.json`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/eas.json) con perfil `preview` configurado para compilar directamente en formato `.apk` instalable en cualquier teléfono Android sin requerir Play Store.
-- [ ] **Siguiente paso**: Generar y descargar el archivo APK mediante EAS Build (`npx eas-cli@latest build -p android --profile preview`).
+  - Creado archivo [`eas.json`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/eas.json) con perfil `preview`.
+- [x] **Paso 7 (Usuario)**: Compilación automatizada en la nube sin requerir cuenta de Expo (GitHub Actions).
+  - Creado flujo en [`.github/workflows/build-android.yml`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/.github/workflows/build-android.yml) para ejecutar `npx expo prebuild` y compilar el `.apk` nativo mediante Gradle en las máquinas virtuales gratuitas de GitHub (Ubuntu con JDK 17 y Android SDK preinstalados).
+  - El APK resultante queda disponible para descarga directa en la pestaña **Actions** del repositorio de GitHub sin registros ni herramientas locales.
+- [ ] **Siguiente paso**: *(Pendiente de confirmación de descarga y prueba del APK por el usuario)*
 
 
 
