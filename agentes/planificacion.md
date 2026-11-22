@@ -118,6 +118,11 @@ TuCambio/
   - Configurado layout minimalista en [`src/app/_layout.tsx`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/src/app/_layout.tsx) con `<Stack>` y `<StatusBar>`.
   - Configurada pantalla base limpia en [`src/app/index.tsx`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/src/app/index.tsx).
   - Verificación de TypeScript exitosa (`tsc --noEmit` sin errores).
+- [x] **Paso 3 (Usuario)**: Configuración e implementación de la paleta Dark desde el inicio.
+  - Creado módulo centralizado de tokens de color en [`src/constants/colors.ts`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/src/constants/colors.ts) (fondo oscuro `#0B0F19`, superficies `#151D2F`/`#162035`, acentos verde esmeralda `#10B981`, azul oficial BCV `#38BDF8` y dorado paralelo `#FBBF24`).
+  - Actualizado layout en [`src/app/_layout.tsx`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/src/app/_layout.tsx) con `<StatusBar style="light" />` y fondo oscuro en `contentStyle`.
+  - Diseñada la cabecera e interfaz base en [`src/app/index.tsx`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/src/app/index.tsx) con soporte para `SafeAreaView`.
+  - Verificación de TypeScript exitosa (`tsc --noEmit` sin errores).
 - [ ] **Siguiente paso**: *(Pendiente de indicación del usuario)*
 
 
