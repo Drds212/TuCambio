@@ -1,56 +1,67 @@
-# Welcome to your Expo app 👋
+# TuCambio 💵🇻🇪
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**TuCambio** es una aplicación móvil moderna, rápida y ligera desarrollada con **React Native** y **Expo** para la consulta de la tasa de cambio del dólar a bolívares (USD/VES) en Venezuela.
 
-## Get started
+La aplicación consume datos en tiempo real de la API pública de [DolarApi](https://dolarapi.com/docs/venezuela/), proporcionando las cotizaciones más consultadas en el país de forma clara y accesible.
 
-1. Install dependencies
+---
 
+## 🚀 Características Principales
+
+- **📊 Cotizaciones en Tiempo Real**:
+  - **Dólar Oficial (BCV)**: Valor promedio y fecha de actualización oficial.
+  - **Dólar Paralelo**: Cotización promedio del mercado no oficial.
+- **🔄 Actualización Rápida**: Soporte para *pull-to-refresh* para refrescar las tasas en cualquier momento.
+- **📴 Modo Offline (Caché Local)**: Si no tienes conexión a internet, la aplicación muestra la última cotización registrada con su respectiva marca de tiempo.
+- **🧮 Calculadora / Conversor Integrado**: Convierte rápidamente montos de Dólares (USD) a Bolívares (VES) y viceversa utilizando la tasa oficial o paralela.
+- **⚡ Rendimiento y Fluidez**: Optimizada para dispositivos Android con tiempos de carga mínimos e interfaz limpia.
+
+---
+
+## 🛠️ Stack Tecnológico
+
+- **Framework**: [React Native](https://reactnative.dev/) (v0.88+)
+- **Plataforma y Tooling**: [Expo SDK 58](https://expo.dev/)
+- **Enrutamiento**: [Expo Router](https://docs.expo.dev/router/introduction/) (File-based routing)
+- **Lenguaje**: [TypeScript](https://www.typescriptlang.org/)
+- **Almacenamiento Local**: AsyncStorage
+- **Fuente de Datos**: [DolarApi Venezuela](https://ve.dolarapi.com/v1/dolares)
+
+---
+
+## 📦 Instalación y Desarrollo Local
+
+1. **Clonar el repositorio**:
    ```bash
+   git clone https://github.com/drds212/TuCambio.git
+   cd TuCambio
+   ```
+
+2. **Instalar dependencias**:
+   ```bash
+   pnpm install
+   # o
    npm install
    ```
 
-2. Start the app
-
+3. **Iniciar el servidor de desarrollo**:
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+4. **Ejecutar en Android**:
+   - Presiona `a` en la terminal para abrir en un emulador Android o dispositivo conectado con depuración USB habilitada.
+   - O escanea el código QR desde la aplicación **Expo Go**.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 📋 Planificación del Proyecto
 
-## Get a fresh project
+La documentación y seguimiento del desarrollo se encuentra en la carpeta [`agentes/`](./agentes/):
+- [`agentes/planificacion.md`](./agentes/planificacion.md): Planificación del MVP, arquitectura técnica y requerimientos.
 
-When you're ready, run:
+---
 
-```bash
-npm run reset-project
-```
+## 📄 Licencia
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
-
-### Other setup steps
-
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](./LICENSE) para más detalles.
