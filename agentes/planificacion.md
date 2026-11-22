@@ -135,13 +135,13 @@ TuCambio/
   - **Hook personalizado**: Creado [`src/hooks/useDolarRates.ts`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/src/hooks/useDolarRates.ts) para encapsular estados de carga (`isLoading`, `isRefreshing`), errores y función de refresco.
   - **Integración en UI**: Conectado el hook en [`src/app/index.tsx`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/src/app/index.tsx) con soporte para pull-to-refresh (`RefreshControl`), formateo numérico local en bolívares y fechas legibles.
   - Verificación de TypeScript exitosa (`tsc --noEmit` sin errores).
-- [x] **Paso 6 (Usuario)**: Configuración para exportación e instalación de APK Android (.apk).
-  - Configurado identificador de paquete único Android en [`app.json`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/app.json): `"package": "com.drds212.tucambio"`.
-  - Creado archivo [`eas.json`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/eas.json) con perfil `preview`.
-- [x] **Paso 7 (Usuario)**: Compilación automatizada en la nube sin requerir cuenta de Expo (GitHub Actions).
-  - Creado flujo en [`.github/workflows/build-android.yml`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/.github/workflows/build-android.yml) para ejecutar `npx expo prebuild` y compilar el `.apk` nativo mediante Gradle en las máquinas virtuales gratuitas de GitHub (Ubuntu con JDK 17 y Android SDK preinstalados).
-  - El APK resultante queda disponible para descarga directa en la pestaña **Actions** del repositorio de GitHub sin registros ni herramientas locales.
-- [ ] **Siguiente paso**: *(Pendiente de confirmación de descarga y prueba del APK por el usuario)*
+- [x] **Paso 6 (Usuario)**: Configuración oficial de Expo para exportar APK Android.
+  - Identificador único configurado en [`app.json`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/app.json): `"package": "com.drds212.tucambio"`.
+  - Configurado [`eas.json`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/eas.json) con perfil `preview` para generación directa de `.apk`.
+- [ ] **Paso 7: Selección de método oficial de Expo para compilar**:
+  - **Opción A (Oficial y recomendada - EAS Build)**: Iniciar sesión en Expo (con cuenta gratuita de GitHub en expo.dev) y compilar en la nube con `npx eas-cli@latest build -p android --profile preview`.
+  - **Opción B (Local sin cuenta - Expo CLI)**: Instalar Java JDK 17 y Android Studio/SDK localmente y compilar con `npx expo run:android`.
+
 
 
 
