@@ -111,6 +111,13 @@ TuCambio/
   - Actualizado [README.md](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/README.md) con la descripción completa de TuCambio, stack y características.
   - Rama renombrada a `main` y cambios confirmados en git local.
   - Vinculado y subido con éxito al repositorio remoto en GitHub: [https://github.com/Drds212/TuCambio](https://github.com/Drds212/TuCambio).
+- [x] **Paso 2 (Usuario)**: Limpieza del template inicial de Expo.
+  - Eliminados componentes de demostración (`src/components/`, `src/constants/`, `src/hooks/`, `src/global.css`).
+  - Eliminada pantalla demo `src/app/explore.tsx` y script de reseteo `scripts/reset-project.js`.
+  - Eliminados assets e imágenes no utilizados del template en `assets/images/` preservando iconos y splash oficial.
+  - Configurado layout minimalista en [`src/app/_layout.tsx`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/src/app/_layout.tsx) con `<Stack>` y `<StatusBar>`.
+  - Configurada pantalla base limpia en [`src/app/index.tsx`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/src/app/index.tsx).
+  - Verificación de TypeScript exitosa (`tsc --noEmit` sin errores).
 - [ ] **Siguiente paso**: *(Pendiente de indicación del usuario)*
 
 
