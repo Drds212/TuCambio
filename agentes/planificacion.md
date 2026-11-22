@@ -107,5 +107,10 @@ TuCambio/
 
 *Nota: La ruta de trabajo, prioridades y orden de ejecución son definidos directamente por el usuario paso a paso.*
 
-- [ ] **Paso inicial definido por el usuario**: *(Pendiente de indicación del usuario)*
+- [x] **Paso 1 (Usuario)**: Configuración del repositorio y README.
+  - Actualizado [README.md](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/README.md) con la descripción completa de TuCambio, stack y características.
+  - Rama renombrada a `main` y cambios confirmados en git local.
+  - *(En proceso)* Vincular repositorio remoto en GitHub (`TuCambio`).
+- [ ] **Siguiente paso**: *(Pendiente de definir por el usuario tras vincular GitHub)*
+
 
