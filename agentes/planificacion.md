@@ -135,6 +135,10 @@ TuCambio/
   - **Hook personalizado**: Creado [`src/hooks/useDolarRates.ts`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/src/hooks/useDolarRates.ts) para encapsular estados de carga (`isLoading`, `isRefreshing`), errores y función de refresco.
   - **Integración en UI**: Conectado el hook en [`src/app/index.tsx`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/src/app/index.tsx) con soporte para pull-to-refresh (`RefreshControl`), formateo numérico local en bolívares y fechas legibles.
   - Verificación de TypeScript exitosa (`tsc --noEmit` sin errores).
-- [ ] **Siguiente paso**: *(Pendiente de indicación del usuario)*
+- [x] **Paso 6 (Usuario)**: Configuración para exportación e instalación de APK Android (.apk).
+  - Configurado identificador de paquete único Android en [`app.json`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/app.json): `"package": "com.drds212.tucambio"`.
+  - Creado archivo [`eas.json`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/eas.json) con perfil `preview` configurado para compilar directamente en formato `.apk` instalable en cualquier teléfono Android sin requerir Play Store.
+- [ ] **Siguiente paso**: Generar y descargar el archivo APK mediante EAS Build (`npx eas-cli@latest build -p android --profile preview`).
+
 
 
