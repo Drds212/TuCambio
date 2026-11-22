@@ -123,6 +123,12 @@ TuCambio/
   - Actualizado layout en [`src/app/_layout.tsx`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/src/app/_layout.tsx) con `<StatusBar style="light" />` y fondo oscuro en `contentStyle`.
   - Diseñada la cabecera e interfaz base en [`src/app/index.tsx`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/src/app/index.tsx) con soporte para `SafeAreaView`.
   - Verificación de TypeScript exitosa (`tsc --noEmit` sin errores).
+- [x] **Paso 4 (Usuario)**: Rediseño a Módulo Principal (Hero Card) con selector interactivo.
+  - Se sustituyeron las dos tarjetas separadas por un **módulo principal único** con mayor jerarquía visual y protagonismo de la tasa.
+  - Implementado selector tipo *segmented control* interactivo para alternar dinámicamente entre **BCV Oficial** (azul `#38BDF8`) y **Paralelo** (dorado `#FBBF24`).
+  - Ajustada la posición del selector debajo de la tarjeta principal para un flujo visual más ergonómico.
+  - Conservados los textos de referencia personalizados por el usuario ("Promedio paralelo").
+  - Verificación de TypeScript exitosa (`tsc --noEmit` sin errores).
 - [ ] **Siguiente paso**: *(Pendiente de indicación del usuario)*
 
 
