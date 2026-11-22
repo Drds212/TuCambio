@@ -129,6 +129,12 @@ TuCambio/
   - Ajustada la posición del selector debajo de la tarjeta principal para un flujo visual más ergonómico.
   - Conservados los textos de referencia personalizados por el usuario ("Promedio paralelo").
   - Verificación de TypeScript exitosa (`tsc --noEmit` sin errores).
+- [x] **Paso 5 (Usuario)**: Arquitectura y separación de responsabilidades para DolarApi.
+  - **Tipos TypeScript**: Creado [`src/types/dolar.ts`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/src/types/dolar.ts) con las interfaces `DolarRateResponse`, `DolarRatesMap` y `RateCategory`.
+  - **Servicio API puro**: Creado [`src/services/dolarApi.ts`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/src/services/dolarApi.ts) aislado de la interfaz, con manejo de timeout (`AbortController`), control de errores HTTP y mapeo normalizado.
+  - **Hook personalizado**: Creado [`src/hooks/useDolarRates.ts`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/src/hooks/useDolarRates.ts) para encapsular estados de carga (`isLoading`, `isRefreshing`), errores y función de refresco.
+  - **Integración en UI**: Conectado el hook en [`src/app/index.tsx`](file:///c:/Users/Usuario/Documents/docs/dev/proyectos-con-js/app-tasa-de-cambio/TuCambio/src/app/index.tsx) con soporte para pull-to-refresh (`RefreshControl`), formateo numérico local en bolívares y fechas legibles.
+  - Verificación de TypeScript exitosa (`tsc --noEmit` sin errores).
 - [ ] **Siguiente paso**: *(Pendiente de indicación del usuario)*
 
 

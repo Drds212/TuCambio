@@ -1,12 +1,20 @@
 import { useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Pressable,
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Colors } from "../constants/colors";
-
-type RateType = "oficial" | "paralelo";
+import { useDolarRates } from "../hooks/useDolarRates";
+import { RateCategory } from "../types/dolar";
 
 interface RateConfig {
-  id: RateType;
+  id: RateCategory;
   label: string;
   sourceName: string;
   badgeLabel: string;
@@ -15,7 +23,7 @@ interface RateConfig {
   description: string;
 }
 
-const RATE_CONFIGS: Record<RateType, RateConfig> = {
+const RATE_CONFIGS: Record<RateCategory, RateConfig> = {
   oficial: {
     id: "oficial",
     label: "BCV Oficial",
@@ -23,7 +31,7 @@ const RATE_CONFIGS: Record<RateType, RateConfig> = {
     badgeLabel: "TASA OFICIAL",
     accentColor: Colors.official,
     accentMuted: Colors.officialMuted,
-    description: "Tasa BCV",
+    description: "Tasa oficial de referencia emitida por el BCV",
   },
   paralelo: {
     id: "paralelo",
@@ -32,22 +40,70 @@ const RATE_CONFIGS: Record<RateType, RateConfig> = {
     badgeLabel: "Promedio paralelo",
     accentColor: Colors.parallel,
     accentMuted: Colors.parallelMuted,
-    description: "Promedio de cambio informal",
+    description: "Promedio del mercado informal de divisas",
   },
 };
 
+function formatUpdateDate(dateString?: string): string {
+  if (!dateString) return "Consultando fecha...";
+  try {
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return dateString;
+    return date.toLocaleString("es-VE", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  } catch {
+    return dateString;
+  }
+}
+
+function formatRate(value?: number | null): string {
+  if (value === undefined || value === null) return "Bs. --,--";
+  return `Bs. ${value.toLocaleString("es-VE", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
+}
+
 export default function HomeScreen() {
-  const [selectedRate, setSelectedRate] = useState<RateType>("oficial");
+  const [selectedRate, setSelectedRate] = useState<RateCategory>("oficial");
+  const { rates, isLoading, isRefreshing, error, refetch } = useDolarRates();
+
   const currentConfig = RATE_CONFIGS[selectedRate];
+  const currentRateData = rates[selectedRate];
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={refetch}
+            tintColor={Colors.primary}
+            colors={[Colors.primary]}
+          />
+        }
+      >
         {/* Cabecera */}
         <View style={styles.header}>
           <Text style={styles.headerTitle}>TuCambio</Text>
           <Text style={styles.headerSubtitle}>Tasa de cambio USD / VES</Text>
         </View>
+
+        {/* Mensaje de Error si la conexión falla */}
+        {error && (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>⚠️ {error}</Text>
+            <Pressable style={styles.retryButton} onPress={refetch}>
+              <Text style={styles.retryButtonText}>Reintentar</Text>
+            </Pressable>
+          </View>
+        )}
 
         {/* Módulo Principal de Cotización (Hero Card) */}
         <View
@@ -80,14 +136,23 @@ export default function HomeScreen() {
               </Text>
             </View>
             <Text style={styles.heroSourceText}>
-              {currentConfig.sourceName}
+              {currentRateData?.nombre || currentConfig.sourceName}
             </Text>
           </View>
 
           {/* Valor Principal */}
           <View style={styles.heroRateSection}>
             <Text style={styles.heroRatePrefix}>1 USD equivale a</Text>
-            <Text style={styles.heroRateValue}>Bs. --,--</Text>
+            {isLoading && !currentRateData ? (
+              <View style={styles.loadingContainer}>
+                <ActivityIndicator size="small" color={currentConfig.accentColor} />
+                <Text style={styles.loadingText}>Consultando DolarApi...</Text>
+              </View>
+            ) : (
+              <Text style={styles.heroRateValue}>
+                {formatRate(currentRateData?.promedio)}
+              </Text>
+            )}
             <Text style={styles.heroDescription}>
               {currentConfig.description}
             </Text>
@@ -98,24 +163,32 @@ export default function HomeScreen() {
             <View style={styles.heroFooterItem}>
               <Text style={styles.heroFooterLabel}>Última actualización</Text>
               <Text style={styles.heroFooterValue}>
-                Conectando con DolarApi...
+                {formatUpdateDate(currentRateData?.fechaActualizacion)}
               </Text>
             </View>
             <View style={styles.statusPill}>
               <View
                 style={[
                   styles.statusDot,
-                  { backgroundColor: currentConfig.accentColor },
+                  {
+                    backgroundColor: error
+                      ? Colors.danger
+                      : isLoading
+                      ? Colors.parallel
+                      : Colors.primary,
+                  },
                 ]}
               />
-              <Text style={styles.statusText}>En espera</Text>
+              <Text style={styles.statusText}>
+                {error ? "Error" : isLoading ? "Cargando" : "Al día"}
+              </Text>
             </View>
           </View>
         </View>
 
-        {/* Selector de Tasa (Segmented Control) ahora debajo de la tarjeta */}
+        {/* Selector de Tasa (Segmented Control) ubicado debajo de la tarjeta */}
         <View style={styles.selectorContainer}>
-          {(["oficial", "paralelo"] as RateType[]).map((type) => {
+          {(["oficial", "paralelo"] as RateCategory[]).map((type) => {
             const config = RATE_CONFIGS[type];
             const isActive = selectedRate === type;
 
@@ -158,13 +231,13 @@ export default function HomeScreen() {
           })}
         </View>
 
-        {/* Espacio reservado para las siguientes funcionalidades */}
+        {/* Mensaje inferior indicativo */}
         <View style={styles.bottomPlaceholder}>
           <Text style={styles.bottomPlaceholderText}>
-            Toca el selector para alternar entre el Dólar Oficial y el Paralelo
+            Desliza hacia abajo para actualizar las tasas en tiempo real
           </Text>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -174,10 +247,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.background,
   },
-  container: {
-    flex: 1,
+  scrollContent: {
     paddingHorizontal: 20,
     paddingTop: 16,
+    paddingBottom: 24,
   },
   header: {
     marginBottom: 20,
@@ -192,6 +265,36 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: Colors.textSecondary,
     marginTop: 4,
+  },
+  errorContainer: {
+    backgroundColor: Colors.dangerMuted,
+    borderColor: Colors.danger,
+    borderWidth: 1,
+    borderRadius: 12,
+    padding: 12,
+    marginBottom: 16,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  errorText: {
+    color: Colors.textPrimary,
+    fontSize: 13,
+    flex: 1,
+  },
+  retryButton: {
+    backgroundColor: Colors.card,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: Colors.danger,
+    marginLeft: 8,
+  },
+  retryButtonText: {
+    color: Colors.textPrimary,
+    fontSize: 12,
+    fontWeight: "600",
   },
   // Módulo Principal (Hero Card)
   heroCard: {
@@ -233,6 +336,17 @@ const styles = StyleSheet.create({
     color: Colors.textSecondary,
     fontWeight: "500",
     marginBottom: 6,
+  },
+  loadingContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    paddingVertical: 10,
+  },
+  loadingText: {
+    fontSize: 18,
+    color: Colors.textSecondary,
+    fontWeight: "500",
   },
   heroRateValue: {
     fontSize: 46,
